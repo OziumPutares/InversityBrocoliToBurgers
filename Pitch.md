@@ -16,5 +16,5 @@ My name is Eugeniusz Lewandowski, This is my INversity Brocoli To Brugers pitch 
 
 
 # Potential improvements
-
+# Potential Issues?????
 # Conclusion
