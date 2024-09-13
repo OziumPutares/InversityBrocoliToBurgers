@@ -1,17 +1,25 @@
-# First 
+# First
 Create a example of major websites e.g. `facebook.com` and `x.com` with and without\
 
-### ToDo 
+### ToDo
 1. Setup typical Facebook/Twitter history by pulling from api jsons???
-2. Show website without ad blocker 
+2. Show website without ad blocker
 3. And then with
 4. Interview people on opinions
 5. Add demo script
 6. Add Potential improvements Script
 7. Add Conclusion
 
-# Script 
-My name is Eugeniusz Lewandowski, This is my INversity Brocoli To Brugers pitch I think that the main reason for obesity is the ease of access to junk food like burgers however this requires major legislation in order to control. Another **major** factor in obesity and the large consupmtion of junk food is the temptation casused by adverts. Since people spend more and more time online, a new major factor in the mass purchasing of junk food is the targeted and untargeted food __adviertisement__ of junk food with discounts, maikng the junk more financially attractive; ease of purchase, with advertising links directly leading to a one or two click purchase; and most importantly the constant cues, through the advertisements leading to the constant entrenching of the already developed habits. In order to prevent these advertisements I decided to create a custom adblocker variant that only blocks advertisements and attempts to reduce the collection of third party cookies by preventing the accessing of well known tracking food links. This is achieved by using the well known adblocker Ublock origin and by adding specific filters, chosen by the user to allow for fine grain AI based filetring.  
+# Script
+My name is Eugeniusz Lewandowski, This is my INversity Brocoli To Brugers pitch I think that the main reason for obesity is the ease of access to junk food like
+burgers however this requires major legislation in order to control. Another **major** factor in obesity and the large consupmtion of junk food is the temptation casused by adverts.
+Since people spend more and more time online, a new major factor in the mass purchasing of junk food is the targeted and untargeted food __adviertisement__ of junk food with discounts,
+maikng the junk more financially attractive; ease of purchase, with advertising links directly leading to a one or two click purchase; and most importantly the constant cues,
+through the advertisements leading to the constant entrenching of the already developed habits.
+In order to prevent these advertisements I decided to create a custom adblocker that only blocks advertisements from junk food chains like McDonald and KFC,
+and attempts to reduce the collection of third party cookies, by preventing the accessing of known tracking links,
+therefore preventing the vulnerable users from being targeted by the companies.
+This is achieved by using the well known EasyList filter list and by adding specific filters, chosen by the user to allow for fine grained customisable content filetring.
 # Demo
 
 
