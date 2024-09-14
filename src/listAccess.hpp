@@ -1,5 +1,6 @@
-#include <cstdio>
 #include <curl/curl.h>
 #include <curl/easy.h>
+
+#include <cstdio>
 #include <string>
-void get_page(std::string url, const char *file_name);
+void GetPage(char const* url, char const* file_name);

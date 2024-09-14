@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED 23)
 
 add_library(low_level_code STATIC listAccess.hpp listAccess.cpp)
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp parseConfig.hpp parseConfig.cpp)
 find_package(CURL REQUIRED)
 target_link_libraries(low_level_code CURL::libcurl)
 target_link_libraries(${PROJECT_NAME} low_level_code )

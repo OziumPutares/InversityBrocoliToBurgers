@@ -1,0 +1,4 @@
+include1!exclude1
+#include2!exclude2
+!exclude3
+include4!

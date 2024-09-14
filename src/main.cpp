@@ -1,61 +1,67 @@
-
-#include "listAccess.hpp"
-#include <algorithm>
 #include <cctype>
 #include <fstream>
+#include <iostream>
+#include <ostream>
 #include <print>
 #include <sstream>
 #include <string>
-#include <string_view>
-#include <vector>
+
+#include "listAccess.hpp"
+#include "parseConfig.hpp"
 
 auto Tolower(std::string &buf) -> std::string {
-  for (char &index : buf) {
-    index = std::tolower(index);
+  for (char &Index : buf) {
+    Index = std::tolower(Index);
   }
   return buf;
 }
-auto LoadSearchTerms() -> std::vector<std::string> {
-  std::string Line;
-  std::ifstream SearchTerms("searchTerms.txt");
-  std::vector<std::string> SearchTermList;
-  while (std::getline(SearchTerms, Line)) {
-    if (Line[0] == '#') {
-      continue;
-    }
-    SearchTermList.emplace_back(Line);
-  }
-  return SearchTermList;
+auto ReadFileInput(std::string const &fileName) -> std::stringstream {
+  return std::stringstream() << std::ifstream(fileName).rdbuf();
 }
+
+std::string const kFileInput = "searchTerms.txt";
 auto main() -> int {
-
-  std::stringstream ActiveList;
-
   std::string Line;
-  get_page("https://easylist.to/easylist/easylist.txt", "blockingList.txt");
   std::ifstream List("blockingList.txt");
+  GetPage("https://easylist.to/easylist/easylist.txt", "blockingList.txt");
   for (auto LineNum = 0; LineNum < 18; LineNum++) {
     std::getline(List, Line);
   }
 
-  while (std::getline(List, Line)) {
-    Tolower(Line);
-    if (std::ranges::any_of(SearchTermList,
-                            [Line](std::string_view FilterElem) {
-                              if (FilterElem.starts_with('!')) {
-                                return false;
-                              }
-                              return Line.contains(FilterElem);
-                            }) &&
-        std::ranges::all_of(
-            SearchTermList, [Line](std::string_view FilterElem) {
-              if (FilterElem.starts_with('!')) {
-                return Line.contains(FilterElem.substr(1, FilterElem.size()));
-              }
-              return true;
-            })) {
-      ActiveList << Line << '\n';
-    }
-  }
-  std::ofstream("blockingListA.txt") << ActiveList.str();
+  std::cout << std::endl;
 }
+
+// auto TempFunc() {
+//   std::stringstream ActiveList;
+//
+//   std::string Line;
+//   LoadSearchTerms();
+//
+//   get_page("https://easylist.to/easylist/easylist.txt", "blockingList.txt");
+//   std::ifstream List("blockingList.txt");
+//   for (auto LineNum = 0; LineNum < 18; LineNum++) {
+//     std::getline(List, Line);
+//   }
+//
+//   while (std::getline(List, Line)) {
+//     Tolower(Line);
+//     if (std::ranges::any_of(SearchTermList,
+//                             [Line](std::string_view FilterElem) {
+//                               if (FilterElem.starts_with('!')) {
+//                                 return false;
+//                               }
+//                               return Line.contains(FilterElem);
+//                             }) &&
+//         std::ranges::all_of(
+//             SearchTermList, [Line](std::string_view FilterElem) {
+//               if (FilterElem.starts_with('!')) {
+//                 return Line.contains(FilterElem.substr(1,
+//                 FilterElem.size()));
+//               }
+//               return true;
+//             })) {
+//       ActiveList << Line << '\n';
+//     }
+//   }
+//   std::ofstream("blockingListA.txt") << ActiveList.str();
+// }
