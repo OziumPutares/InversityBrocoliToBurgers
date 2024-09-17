@@ -16,5 +16,5 @@ ads!google!amazon
 ubereat
 ```
 **N.B. if you start a line with an exclamtion(`!`) mark all the lines will be filtered for that term and backslashes can be used to include exclamation marks or hashtags in the line e.g. `\#` or `\!`**
-# Building
+## Building
 For building see [building.md](https://github.com/OziumPutares/InversityBrocoliToBurgers/blob/main/building.md)
