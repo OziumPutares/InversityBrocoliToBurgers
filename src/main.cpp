@@ -5,7 +5,9 @@
 #include <print>
 #include <sstream>
 #include <string>
+#include <string_view>
 
+#include "filterList.hpp"
 #include "listAccess.hpp"
 #include "parseConfig.hpp"
 
@@ -29,6 +31,9 @@ auto main() -> int {
   }
 
   std::cout << std::endl;
+  std::stringstream String("");
+  std::vector<std::string_view> Vec;
+  FilterOutForbiddenTerms(String, Vec);
 }
 
 // auto TempFunc() {

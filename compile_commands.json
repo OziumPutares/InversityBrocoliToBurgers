@@ -1,0 +1,26 @@
+[
+{
+  "directory": "/home/Eugene/Git/Inversity/InversityBrocoliToBurgers/build/tests",
+  "command": "/sbin/c++ -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/Eugene/Git/Inversity/InversityBrocoliToBurgers/src -isystem /home/Eugene/.conan2/p/b/catch937541e096ed3/p/include -m64 -g -std=c++23 -o CMakeFiles/ParseConfigTest.dir/parseTests.cpp.o -c /home/Eugene/Git/Inversity/InversityBrocoliToBurgers/tests/parseTests.cpp",
+  "file": "/home/Eugene/Git/Inversity/InversityBrocoliToBurgers/tests/parseTests.cpp",
+  "output": "tests/CMakeFiles/ParseConfigTest.dir/parseTests.cpp.o"
+},
+{
+  "directory": "/home/Eugene/Git/Inversity/InversityBrocoliToBurgers/build/src",
+  "command": "/sbin/c++ -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/Eugene/Git/Inversity/InversityBrocoliToBurgers/src -m64 -g -std=c++23 -o CMakeFiles/parsing.dir/parseConfig.cpp.o -c /home/Eugene/Git/Inversity/InversityBrocoliToBurgers/src/parseConfig.cpp",
+  "file": "/home/Eugene/Git/Inversity/InversityBrocoliToBurgers/src/parseConfig.cpp",
+  "output": "src/CMakeFiles/parsing.dir/parseConfig.cpp.o"
+},
+{
+  "directory": "/home/Eugene/Git/Inversity/InversityBrocoliToBurgers/build/src",
+  "command": "/sbin/c++ -DCURL_STATICLIB=1 -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/Eugene/Git/Inversity/InversityBrocoliToBurgers/src -isystem /home/Eugene/.conan2/p/b/libcu615d2533fbbcf/p/include -m64 -g -std=c++23 -o CMakeFiles/low_level_code.dir/listAccess.cpp.o -c /home/Eugene/Git/Inversity/InversityBrocoliToBurgers/src/listAccess.cpp",
+  "file": "/home/Eugene/Git/Inversity/InversityBrocoliToBurgers/src/listAccess.cpp",
+  "output": "src/CMakeFiles/low_level_code.dir/listAccess.cpp.o"
+},
+{
+  "directory": "/home/Eugene/Git/Inversity/InversityBrocoliToBurgers/build/src",
+  "command": "/sbin/c++ -DCURL_STATICLIB=1 -D_GLIBCXX_USE_CXX11_ABI=0 -I/home/Eugene/Git/Inversity/InversityBrocoliToBurgers/src -isystem /home/Eugene/.conan2/p/b/libcu615d2533fbbcf/p/include -m64 -g -std=c++23 -o CMakeFiles/ObesityTacklingAdBlocker.dir/main.cpp.o -c /home/Eugene/Git/Inversity/InversityBrocoliToBurgers/src/main.cpp",
+  "file": "/home/Eugene/Git/Inversity/InversityBrocoliToBurgers/src/main.cpp",
+  "output": "src/CMakeFiles/ObesityTacklingAdBlocker.dir/main.cpp.o"
+}
+]

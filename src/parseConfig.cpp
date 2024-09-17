@@ -1,41 +1,33 @@
 #include "parseConfig.hpp"
+
 #include <sstream>
 #include <string>
+#include <vector>
 
-auto LoadRequiredTerms::ParseRequiredSearchTerms(
-    std::stringstream configuration) -> void {
-  std::string Line;
-  std::vector<std::string> SearchTermList;
-  while (std::getline(configuration, Line)) {
-    if (Line.starts_with('#')) {
-      continue;
-    }
-    if (Line.starts_with('!')) {
-      continue;
-    }
-    SearchTermList.emplace_back(Line.substr(0, Line.find('!')));
+auto ParseRequiredSearchTermLine(std::string const &Line) -> std::string {
+  if (Line.starts_with('!') || Line.starts_with('#') || Line.empty()) {
+    return {};
   }
-  RequiredTerms_ = SearchTermList;
+  return Line.substr(0, Line.find('!'));
 }
 
-auto LoadForbiddenTerms::ParseForbiddenSearchTerms(
-    std::stringstream configuration) -> void {
-  std::string Line;
+auto ParseForbiddenSearchTermUnsafe(std::string const &line)
+    -> std::vector<std::string> {
+  std::stringstream LineSS(line);
+  std::string Token;
   std::vector<std::string> SearchTermList;
-  while (std::getline(configuration, Line)) {
-    if (Line.starts_with('#')) {
-      continue;
-    }
-    std::stringstream LineSS(Line);
-    std::string Token;
-    if (Line.contains("!")) {
-      std::getline(LineSS, Token, '!');
-      while (std::getline(LineSS, Token, '!')) {
-        SearchTermList.emplace_back(Token);
-      }
-    }
+  std::getline(LineSS, Token, '!');
+  while (std::getline(LineSS, Token, '!')) {
+    SearchTermList.emplace_back(Token);
   }
-  ForbiddenTerms_ = SearchTermList;
+  return SearchTermList;
+}
+auto ParseForbiddenSearchTermLine(std::string const &line)
+    -> std::vector<std::string> {
+  if (line.starts_with('#') || !line.contains("!")) {
+    return {};
+  }
+  return ParseForbiddenSearchTermUnsafe(line);
 }
 
 auto Tolower(std::string &buf) -> std::string;
