@@ -23,17 +23,12 @@ auto ReadFileInput(std::string const &fileName) -> std::stringstream {
 
 std::string const kFileInput = "searchTerms.txt";
 auto main() -> int {
-  std::string Line;
-  std::ifstream List("blockingList.txt");
-  GetPage("https://easylist.to/easylist/easylist.txt", "blockingList.txt");
-  for (auto LineNum = 0; LineNum < 18; LineNum++) {
-    std::getline(List, Line);
-  }
-
-  std::cout << std::endl;
-  std::stringstream String("");
-  std::vector<std::string_view> Vec;
-  FilterOutForbiddenTerms(String, Vec);
+  Config(
+      std::stringstream()
+      << std::ifstream(
+             "/home/Eugene/Git/Inversity/InversityBrocoliToBurgers/filtering/"
+             "src/searchTerms.txt")
+             .rdbuf());
 }
 
 // auto TempFunc() {

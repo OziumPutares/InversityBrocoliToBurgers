@@ -1,5 +1,5 @@
 # Create test executable
-add_executable(ParseConfigTest parseTests.cpp)
+add_executable(ParseConfigTest parseCFGTests.cpp)
 add_executable(FilterConfigTest filteringTests.cpp)
 
 # Find Catch2 for unit testing

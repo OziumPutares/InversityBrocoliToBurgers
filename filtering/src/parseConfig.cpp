@@ -4,14 +4,14 @@
 #include <string>
 #include <vector>
 
-auto ParseRequiredSearchTermLine(std::string const &Line) -> std::string {
+auto ParseRequiredSearchTermLine(Line const &Line) -> std::string {
   if (Line.starts_with('!') || Line.starts_with('#') || Line.empty()) {
     return {};
   }
   return Line.substr(0, Line.find('!'));
 }
 
-auto ParseForbiddenSearchTermUnsafe(std::string const &line)
+auto ParseForbiddenSearchTermUnsafe(Line const &line)
     -> std::vector<std::string> {
   std::stringstream LineSS(line);
   std::string Token;
@@ -22,7 +22,7 @@ auto ParseForbiddenSearchTermUnsafe(std::string const &line)
   }
   return SearchTermList;
 }
-auto ParseForbiddenSearchTermLine(std::string const &line)
+auto ParseForbiddenSearchTermLine(Line const &line)
     -> std::vector<std::string> {
   if (line.starts_with('#') || !line.contains("!")) {
     return {};
@@ -30,7 +30,7 @@ auto ParseForbiddenSearchTermLine(std::string const &line)
   return ParseForbiddenSearchTermUnsafe(line);
 }
 
-auto Tolower(std::string &buf) -> std::string;
+auto Tolower(Line &buf) -> std::string;
 // auto LoadRequiredTerms::FilterFile(std::string const
 // &FileNameOfFileToFilter,
 //                                    std::string const &outputFileName) -> void

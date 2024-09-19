@@ -1,51 +1,64 @@
 #include <algorithm>
 #include <cassert>
+#include <cmath>
 #include <fstream>
+#include <iterator>
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
-auto ParseRequiredSearchTermLine(std::string const &line) -> std::string;
+
+#include "strongTypes.hpp"
+
+auto ParseRequiredSearchTermLine(Line const &line) -> std::string;
 class RequiredTerm {
   std::string RequiredTerm_;
 
  public:
-  explicit RequiredTerm(std::string const &line) {
+  explicit RequiredTerm(Line const &line) {
     RequiredTerm_ = ParseRequiredSearchTermLine(line);
   }
-  auto ContainsRequiredTerm(std::string const &val) const {
+  auto ContainsRequiredTerm(Line const &val) const {
     return val.contains(RequiredTerm_);
   }
 };
-auto ParseForbiddenSearchTermLine(std::string const &line)
-    -> std::vector<std::string>;
+auto ParseForbiddenSearchTermLine(Line const &line) -> std::vector<std::string>;
 class ForbiddenTerm {
   std::string ForbiddenTerm_;
 
  public:
-  explicit ForbiddenTerm(std::string const &line,
+  explicit ForbiddenTerm(Line const &line,
                          unsigned int indexOfForbiddenTerm = 0) {
-    ForbiddenTerm_ = ParseForbiddenSearchTermLine(line)[indexOfForbiddenTerm];
+    auto Output = ParseForbiddenSearchTermLine(line);
+    if (indexOfForbiddenTerm >= std::size(Output)) {
+      throw std::out_of_range(
+          "Make sure indexOfForbiddenTerm is not greater than the number");
+    }
+    ForbiddenTerm_ = Output[indexOfForbiddenTerm];
   }
+  explicit ForbiddenTerm(std::string term) : ForbiddenTerm_{std::move(term)} {}
+
   constexpr auto ContainsForbiddenTerm(std::string const &val) const -> bool {
     return val.contains(ForbiddenTerm_);
   }
 };
+
 class ForbiddenTerms {
   std::vector<ForbiddenTerm> ForbiddenTerms_;
 
  public:
-  explicit ForbiddenTerms(std::string const &line) {
+  explicit ForbiddenTerms(Line const &line) {
     for (auto const &ForbiddenToken : ParseForbiddenSearchTermLine(line)) {
       ForbiddenTerms_.emplace_back(ForbiddenToken);
     }
   }
-  [[nodiscard]] auto ContainsAForbiddenTerm(std::string const &strToCheck) const
-      -> bool {
-    return std::ranges::none_of(
-        ForbiddenTerms_, [&](ForbiddenTerm const &token) {
-          return token.ContainsForbiddenTerm(strToCheck);
-        });
+  [[nodiscard]] constexpr auto ContainsAForbiddenTerm(
+      std::string const &strToCheck) const -> bool {
+    return std::ranges::any_of(ForbiddenTerms_,
+                               [&](ForbiddenTerm const &token) {
+                                 return token.ContainsForbiddenTerm(strToCheck);
+                               });
   }
 };
 
@@ -57,14 +70,14 @@ class Config {
  public:
   explicit Config(std::string const &fileName) {
     std::fstream InputFile(fileName);
-    std::string Line;
+    Line Line{""};
     while (std::getline(InputFile, Line)) {
       FilterList_.emplace_back(RequiredTerm(Line), ForbiddenTerms(Line));
     }
   }
   auto FilterList(std::stringstream &fileConfig) -> std::string {
     std::string List;
-    std::string Line;
+    Line Line{""};
     while (std::getline(fileConfig, Line)) {
       for (const auto &CFGLine : FilterList_) {
         if (CFGLine.first.ContainsRequiredTerm(Line) &&
