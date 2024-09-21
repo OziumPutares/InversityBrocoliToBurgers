@@ -10,7 +10,7 @@
     "<all_urls>"
   ],
   "background": {
-    "scripts": ["background.js"],
+    "scripts": ["parseConfig.js", "background.js"],
     "persistent": true
   },
   "browser_specific_settings": {
@@ -19,4 +19,3 @@
     }
   }
 }
-
