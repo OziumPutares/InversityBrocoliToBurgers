@@ -1,6 +1,8 @@
 # InversityBrocoliToBurgers
+
 ## What is this project?
 This Project is a Proof of concept for a junk food adblocker oriented in the interest of tackling obesity also made as part of my inversity submission for September 2024
+
 ## How do you configure the filtering script?
 The general format for the configuration is using these simple rules:\
 1. Start a line with text to search for e.g. `eat`
