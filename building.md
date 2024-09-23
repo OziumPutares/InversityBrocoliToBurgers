@@ -5,7 +5,7 @@ That's it....
 # How to install
 ## Chromium
 1. Downlaod the extension with `git` or download as zip from [the github repo](https://github.com/OziumPutares/InversityBrocoliToBurgers) and unzip
-2. Open the extension (chrome://extensions/) tab or your browsers version
+2. Open the extension ([`chrome://extensions`]()) tab or your browsers version
 3. Click load unpacked in the extensions tab
 4. Load the extension from the install directory
 5. The extension is now installed\
