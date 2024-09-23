@@ -19,4 +19,4 @@ ubereat
 ```
 **N.B. if you start a line with an exclamtion(`!`) mark all the lines will be filtered for that term**
 ## Building
-For building see [building.md](https://github.com/OziumPutares/InversityBrocoliToBurgers/blob/main/building.md)
+For building see [building.md](building.md)
