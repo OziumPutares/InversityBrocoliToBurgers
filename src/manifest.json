@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+  "name": "My Adblocker",
+  "version": "1.0",
+  "description": "An adblocker using EasyList",
+  "permissions": [
+    "storage",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
+  ],
+  "background": {
+    "scripts": ["parseConfig.js", "background.js"],
+    "persistent": true
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "myadblocker@example.com"
+    }
+  }
+}
