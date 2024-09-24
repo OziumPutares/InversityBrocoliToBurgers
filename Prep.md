@@ -29,4 +29,5 @@ Therefore to test this Idea I decied to make a "quick" C++ script to filter easy
 tested how this would work by configuring uBlock Origin with the filtered version of EasyList.
 This turned out to block around 90% of all the food ads an therefore I decided to continue with the basic idea.
 While this solution may not be as optimal as a machine learning based detection scheme,
-it took far less time than a neural network would take to implement
+it took far less time than a neural network would take to implement.
+I implemented the entire extension/add-on in Javascript.
