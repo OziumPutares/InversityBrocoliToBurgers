@@ -4,6 +4,7 @@
 This Project is a Proof of concept for a junk food adblocker oriented in the interest of tackling obesity also made as part of my inversity submission for September 2024
 
 ## How do you configure the filtering script?
+The configuration file is located at the root directory of the repo (your install directory)
 The general format for the configuration is using these simple rules:\
 1. Start a line with text to search for e.g. `eat`
 2. Then add an exclamation mark to symbolise a term to exclude e.g. `!feat`
