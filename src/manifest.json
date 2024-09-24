@@ -10,12 +10,16 @@
     "<all_urls>"
   ],
   "background": {
-    "scripts": ["parseConfig.js", "background.js"],
+    "scripts": ["background.js", "parseConfig.js"],
     "persistent": true
   },
+  "web_accessible_resources": [
+    "config.txt"
+  ],
   "browser_specific_settings": {
     "gecko": {
       "id": "myadblocker@example.com"
     }
   }
 }
+

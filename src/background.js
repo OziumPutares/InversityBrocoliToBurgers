@@ -70,25 +70,34 @@ function getEasyList() {
 }
 
 // Main execution
-getEasyList().then(blockList => {
-    const configFileContent = 'exampleRequiredTerm!exampleForbiddenTerm1!exampleForbiddenTerm2\nanotherRequiredTerm!forbiddenTerm3'; // Placeholder for actual config content
-    const config = new Config(configFileContent);
+function fetchConfigFile() {
+    return fetch(chrome.runtime.getURL('config.txt'))
+        .then(response => response.text())
+        .catch(error => {
+            console.error('Error fetching config.txt:', error);
+            return ''; // Return an empty string if there's an error
+        });
+}
 
-    const filteredList = config.filterList(blockList.join('\n')).split('\n').filter(pattern => pattern); // Filter out empty patterns
+// Main execution
+Promise.all([getEasyList(), fetchConfigFile()])
+    .then(([blockList, configFileContent]) => {
+        const config = new Config(configFileContent);  // Use the fetched config file
+        const filteredList = config.filterList(blockList.join('\n')).split('\n').filter(pattern => pattern);
 
-    console.log('Filtered block list:', filteredList); // Debugging log
+        console.log('Filtered block list:', filteredList);
 
-    if (filteredList.length > 0) {
-        chrome.webRequest.onBeforeRequest.addListener(
-            function(details) {
-                console.log("Blocking request to: " + details.url);
-                return { cancel: true };
-            },
-            { urls: filteredList },
-            ["blocking"]
-        );
-    } else {
-        console.warn('No valid URL patterns to block.');
-    }
-}).catch(error => console.error('Error initializing ad blocker:', error));
-
+        if (filteredList.length > 0) {
+            chrome.webRequest.onBeforeRequest.addListener(
+                function(details) {
+                    console.log("Blocking request to: " + details.url);
+                    return { cancel: true };
+                },
+                { urls: filteredList },
+                ["blocking"]
+            );
+        } else {
+            console.warn('No valid URL patterns to block.');
+        }
+    })
+    .catch(error => console.error('Error initializing ad blocker:', error));
