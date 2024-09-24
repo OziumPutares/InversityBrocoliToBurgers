@@ -1,12 +1,16 @@
 # Research
 ## Intro
 ### Key
-1. In this file anything with Markdown quotes \` is a quiote from the AI Chatbot unless specified otherwise
+1. In this file anything with Markdown quotes \` is a quote from the AI Chatbot unless it links to something
+2. Square brackets in markdown qutoes represents and addition e.g `This is the quote[This is not the quote]`
 ## Problem Selection
 Using the AI Chatbot I found out that a major problem in tackling obesity is `how food is promoted (advertising and placement)`.
 So I decided to try to find out how this problem could be tackled and found out that `Personalized ad blockers could be a tech solution to limit exposure to unhealthy food ads.`
 I saw that ads on social media `promote junk food` and using `sophisticated algorithms to target ads based on user behavior making it easy for junk food companies to reach their audience`,
-and that the impact is signaificant due to ads increasing `cravings and consumption` of junk food which contributes to poor habits and diets.
+and that the impact is signaificant due to ads increasing `cravings and consumption` of junk food which contributes to poor habits and diets.\
+Also in my research I found that [`Children consumed 45% more when exposed to food advertising. Adults consumed more of both healthy and unhealthy snack foods following exposure to snack food advertising compared to the other conditions.` and that `advertising [led] to prime automatic eating behaviors and thus influence far more than brand preference alone`](https://psycnet.apa.org/buy/2009-10284-004),
+Further reasearch found that [`Food advertising focuses particularly on unhealthy and palatable food products` and that `Food advertising is considered to be a significant contributor to obesity.`](https://www.sciencedirect.com/science/article/abs/pii/S2352154615001564) these results were found **repeatedly** across many different scientific studies,
+looking at the affect of advertising on food consumption.
 ## Problem Definition
 The problem is the high prevelance of online food advertising.
 ## Implementation Issues
