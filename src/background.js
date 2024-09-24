@@ -106,7 +106,7 @@ function loadConfigFile(configFileName) {
 
 // Initialize the blocking system by applying the EasyList and config filters
 function initializeBlocking() {
-    const configFileName = './config.txt';  // Local config file
+    const configFileName = '../config.txt';  // Local config file
 
     // Load the EasyList and config file
     Promise.all([getEasyList(), loadConfigFile(configFileName)])
