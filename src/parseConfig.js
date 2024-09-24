@@ -1,110 +1,111 @@
 // Utility function to parse required search terms from a line
-function ParseRequiredSearchTermLine(line) {
-    if (line.startsWith('!') || line.startsWith('#') || line.trim() === '') {
-        return ''; // Empty string for lines with comments or invalid data
-    }
-    return line.split('!')[0]; // Return part of the line before '!'
+function parseRequiredSearchTerm(line) {
+    if (isCommentOrEmpty(line)) return ''; // Early return for invalid lines
+    return line.split('!')[0].trim(); // Return part of the line before '!'
 }
 
-// Utility function to parse forbidden terms (unsafe version)
-function ParseForbiddenSearchTermUnsafe(line) {
-    const searchTermList = [];
-    const parts = line.split('!'); // Split by '!'
-    for (let i = 1; i < parts.length; i++) {  // Skip the first part before the '!'
-        searchTermList.push(parts[i]);
-    }
-    return searchTermList;
+// Utility function to parse forbidden terms from a line
+function parseForbiddenSearchTerms(line) {
+    if (isCommentOrEmpty(line)) return [];
+    return line.split('!').slice(1).map(term => term.trim()); // Get terms after the first '!'
 }
 
-// Parse forbidden terms from a line safely
-function ParseForbiddenSearchTermLine(line) {
-    if (line.startsWith('#') || !line.includes('!')) {
-        return []; // Return empty array if no forbidden terms present
-    }
-    return ParseForbiddenSearchTermUnsafe(line);
+// Check if a line is a comment or empty
+function isCommentOrEmpty(line) {
+    return line.startsWith('!') || line.startsWith('#') || line.trim() === '';
 }
 
-// Class representing a required search term
+// Class representing a single required term
 class RequiredTerm {
-    constructor(line) {
-        this.RequiredTerm_ = ParseRequiredSearchTermLine(line);
+    constructor(term) {
+        this.term = term;
     }
 
-    containsRequiredTerm(val) {
-        return val.includes(this.RequiredTerm_);
+    // Check if the required term is present in the provided value
+    containsIn(value) {
+        return this.term && value.includes(this.term);
     }
 }
 
 // Class representing a single forbidden term
 class ForbiddenTerm {
-    constructor(line, indexOfForbiddenTerm = 0) {
-        // Parse forbidden terms from the line
-        const output = ParseForbiddenSearchTermLine(line);
-
-        // Ensure the index is within bounds
-        if (indexOfForbiddenTerm >= output.length) {
-            console.warn(
-                `indexOfForbiddenTerm (${indexOfForbiddenTerm}) is out of range. Available forbidden terms: ${output}`
-            );
-            this.ForbiddenTerm_ = ''; // Set to empty string to avoid errors
-        } else {
-            this.ForbiddenTerm_ = output[indexOfForbiddenTerm];
-        }
+    constructor(term) {
+        this.term = term;
     }
 
-    containsForbiddenTerm(val) {
-        // Check if the forbidden term exists in the string
-        return this.ForbiddenTerm_ && val.includes(this.ForbiddenTerm_);
+    // Check if the forbidden term is present in the provided value
+    containsIn(value) {
+        return this.term && value.includes(this.term);
     }
 }
 
 // Class representing multiple forbidden terms
 class ForbiddenTerms {
-    constructor(line) {
-        this.ForbiddenTerms_ = [];
-        const forbiddenTokens = ParseForbiddenSearchTermLine(line);
-
-        if (forbiddenTokens.length === 0) {
-            console.warn(`No forbidden terms found in line: ${line}`);
-        } else {
-            forbiddenTokens.forEach(token => {
-                this.ForbiddenTerms_.push(new ForbiddenTerm(token));
-            });
-        }
+    constructor(terms) {
+        this.terms = terms.map(term => new ForbiddenTerm(term));
     }
 
-    containsAForbiddenTerm(strToCheck) {
-        return this.ForbiddenTerms_.some(term => term.containsForbiddenTerm(strToCheck));
+    // Check if any forbidden term is present in the provided value
+    containsAny(value) {
+        return this.terms.some(term => term.containsIn(value));
     }
 }
 
-// Config class to load and filter data from a configuration file
-class Config {
-    constructor(fileName) {
-        this.FilterList_ = [];
+// Class representing a single filter rule combining required and forbidden terms
+class FilterRule {
+    constructor(requiredTerm, forbiddenTerms) {
+        this.requiredTerm = new RequiredTerm(requiredTerm);
+        this.forbiddenTerms = new ForbiddenTerms(forbiddenTerms);
+    }
 
-        // Simulating reading a config file line-by-line
-        const lines = fileName.split('\n'); // Assuming fileName is the file content passed in as a string
-        lines.forEach(line => {
-            if (line.trim()) {  // Ignore empty lines
-                this.FilterList_.push([new RequiredTerm(line), new ForbiddenTerms(line)]);
-            }
+    // Check if the value matches the required term and does not contain forbidden terms
+    isMatch(value) {
+        return this.requiredTerm.containsIn(value) && !this.forbiddenTerms.containsAny(value);
+    }
+}
+
+// Class to manage configuration and filtering
+class Config {
+    constructor(fileContent) {
+        this.filterRules = this.parseConfig(fileContent); // SRP: Parse rules
+    }
+
+    // Parse the config content and create filter rules
+    parseConfig(content) {
+        const lines = content.split('\n').filter(line => line.trim());
+        return lines.map(line => {
+            const requiredTerm = parseRequiredSearchTerm(line);
+            const forbiddenTerms = parseForbiddenSearchTerms(line);
+            return new FilterRule(requiredTerm, forbiddenTerms); // Create a FilterRule for each line
         });
     }
 
-    filterList(fileContent) {
-        let filteredList = '';
+    // Delegate filtering responsibility to LineProcessor
+    filterList(content) {
+        const processor = new LineProcessor(this.filterRules);
+        return processor.processLines(content); // Use the LineProcessor to apply the filtering
+    }
+}
 
-        const lines = fileContent.split('\n');
-        lines.forEach(line => {
-            for (const [requiredTerm, forbiddenTerms] of this.FilterList_) {
-                if (requiredTerm.containsRequiredTerm(line) && !forbiddenTerms.containsAForbiddenTerm(line)) {
-                    filteredList += line + '\n';
-                }
+// Class to process lines and apply filter rules
+class LineProcessor {
+    constructor(filterRules) {
+        this.filterRules = filterRules;
+    }
+
+    // Process each line and apply the rules to filter
+    processLines(content) {
+        return content.split('\n').filter(line => this.applyRules(line)).join('\n').trim();
+    }
+
+    // Apply all rules to a single line
+    applyRules(line) {
+        for (const rule of this.filterRules) {
+            if (rule.isMatch(line)) {
+                return true; // Return true if a rule matches
             }
-        });
-
-        return filteredList;
+        }
+        return false; // Return false if no rule matches
     }
 }
 
