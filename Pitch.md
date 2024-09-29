@@ -1,26 +1,33 @@
-# First
-Create a example of major websites e.g. `facebook.com` and `x.com` with and without\
-
-### ToDo
-1. Setup typical Facebook/Twitter history by pulling from api jsons???
-2. Show website without ad blocker
-3. And then with
-4. Interview people on opinions
 5. Add demo script
 6. Add Potential improvements Script
 7. Add Conclusion
 
 # Script
-My name is Eugeniusz Lewandowski, This is my INversity Brocoli To Brugers pitch I think that the main reason for obesity is the ease of access to junk food like
-burgers however this requires major legislation in order to control. Another **major** factor in obesity and the large consupmtion of junk food is the temptation casused by adverts.
-Since people spend more and more time online, a new major factor in the mass purchasing of junk food is the targeted and untargeted food __adviertisement__ of junk food with discounts,
-maikng the junk more financially attractive; ease of purchase, with advertising links directly leading to a one or two click purchase; and most importantly the constant cues,
-through the advertisements leading to the constant entrenching of the already developed habits.
-In order to prevent these advertisements I decided to create a custom adblocker that only blocks advertisements from junk food chains like McDonald and KFC,
-and attempts to reduce the collection of third party cookies, by preventing the accessing of known tracking links,
-therefore preventing the vulnerable users from being targeted by the companies.
-This is achieved by using the well known EasyList filter list and by adding specific filters, chosen by the user to allow for fine grained customisable content filetring.
-# Demo
+# Dem
+Hi, my name is Eugeniusz Lewandowski, and this is my "Broccoli to Burgers" pitch for Inversity.
+Today, I will be introducing you to my solution, Ad&ObesityBlocker.
+
+Obesity has many causes, but one of the primary ones is the easy access to junk food like burgers. However, tackling this issue would require major legislation, which is beyond my current scope.
+Another key factor is the temptation created by the taste of junk food itself.
+But perhaps the most significant and often overlooked factor is the power of advertising—specifically, how junk food ads manipulate consumer behavior.
+
+These ads, powered by sophisticated algorithms based on user behavior, play a massive role in influencing people's decisions.
+After conducting surveys and questionnaires, I discovered that around 33% of respondents initially believed ads were to blame for their junk food consumption.
+When presented with additional facts, this number jumped to 84%.
+This finding is supported by research showing that children consumed 45% more food when exposed to food advertising and that advertising can trigger automatic eating behaviors.
+
+As people spend more and more time online, the role of food advertisements in driving unhealthy eating habits has only increased.
+The constant barrage of junk food ads, often featuring discounts, makes unhealthy options more financially attractive.
+These ads are designed for ease of purchase, leading consumers directly to a one- or two-click buying process.
+More critically, the constant exposure to such ads reinforces unhealthy eating habits over time.
+
+That’s where my solution, Ad&ObesityBlocker, comes in.
+As the name suggests, it blocks food-related advertisements, particularly from major junk food chains like McDonald's and KFC.
+By blocking these ads, we can help protect vulnerable users from being targeted by companies promoting unhealthy food options.
+
+This is achieved by leveraging the well-known EasyList filter and adding custom filters chosen by the user,
+allowing for highly customizable and fine-grained control over the types of content they wish to block.
+In summary, Ad&ObesityBlocker aims to address the impact of junk food advertising on obesity by putting the power back into the hands of users.o
 
 
 # Potential improvements
